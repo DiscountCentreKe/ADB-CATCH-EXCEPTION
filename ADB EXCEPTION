@@ -1,0 +1,24 @@
+ public static string adb(string cmd)
+ {
+     Process process = new Process()
+     {
+         StartInfo = new ProcessStartInfo()
+         {
+             UseShellExecute = false,
+             CreateNoWindow = true,
+             FileName = Environment.CurrentDirectory + "/adb/adb.exe",
+             Arguments = cmd,
+             RedirectStandardOutput = true
+         }
+     };
+     process.Start();
+     return process.StandardOutput.ReadToEnd();
+ }// Start ADB server
+
+ public bool adbdevice()
+ {
+     bool flag = false;
+     if (Form1.adb("devices").Contains("\tdevice"))
+         flag = true;
+     return flag;
+ } 
